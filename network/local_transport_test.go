@@ -1,7 +1,7 @@
 package network
 
 import "testing"
-import "github.com/stretch/testify/assert/"
+// import "github.com/stretch/testify/assert/"
 
 func TestConnect(t *testing.T){
 	tra := NewLocaltransport("A")

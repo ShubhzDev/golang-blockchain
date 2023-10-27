@@ -1,12 +1,25 @@
 package main
 
-import "fmt"
-import "github.com/shubzdev/golang-blockchain/network"
+// import "network"
+import "github.com/ShubhzDev/golang-blockchain/network"
+import "time"
 
 func main(){
 	trLocal := network.NewLocalTransport("LOCAL")
+	trRemote := network.NewLocalTransport("REMOTE")
+
+	trLocal.Connect(trRemote)
+	trRemote.Connect(trLocal)
+
+	go func(){
+		for{
+			trRemote.SendMessage(trLocal.Addr(),[]byte("Hello World"))
+			time.Sleep(1 + time.Second)
+		}
+	}()
+
 	opts := network.ServerOpts{
-		Transposrts: []network.Transport(trLocal)
+		Transports: []network.Transport{trLocal},
 	}
 
 	s:= network.NewServer(opts)
