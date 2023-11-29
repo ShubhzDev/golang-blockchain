@@ -1,10 +1,10 @@
 package core
 
-import {
+import (
 	"github.com/ShubhzDev/golang-blockchain/types"
 	"io"
 	"encoding/binary"
-}
+)
 
 type Header struct{
 	Version uint32
@@ -14,32 +14,28 @@ type Header struct{
 	Nonce uint64
 }
 
-func (h +Header) EncodeBinary(w io.writer) error{
+func (h *Header) EncodeBinary(w io.Writer) error{
 	if err := binary.Write(w,binary.LittleEndian,&h.Version);
-	err != null{
+	err != nil{
 		return err
 	}
 
 	if err := binary.Write(w,binary.LittleEndian,&h.PrevBlock);
-	err != null{
+	err != nil{
 		return err
 	}
 
 	if err := binary.Write(w,binary.LittleEndian,&h.Timestamp);
-	err != null{
+	err != nil{
 		return err
 	}
 
 	if err := binary.Write(w,binary.LittleEndian,&h.Height);
-	err != null{
+	err != nil{
 		return err
 	}
 
-	if err := binary.Write(w,binary.LittleEndian,&h.Nonce);
-	err != null{
-		return err
-	}
-	
+	return binary.Write(w,binary.LittleEndian,&h.Nonce);
 }
 
 type Block struct{

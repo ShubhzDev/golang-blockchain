@@ -1,5 +1,6 @@
 package core
 
-type Trsansaction struct{
-	
+type Transaction struct{
+	Data []byte
+	From Address
 }
